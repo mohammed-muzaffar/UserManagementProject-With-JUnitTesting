@@ -13,14 +13,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.vff.entity.User;
-import com.vff.service.UserServiceImpt;
+import com.vff.service.UserService;
 
 @RestController
 @RequestMapping("CRM")
 public class UserController {
 	
 	@Autowired
-	 private UserServiceImpt service;
+	private UserService service;
 	
 	@PostMapping("/registration")
 	public ResponseEntity<?> register(@RequestBody User user){

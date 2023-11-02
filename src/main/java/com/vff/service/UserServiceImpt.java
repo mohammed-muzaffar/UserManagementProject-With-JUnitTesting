@@ -4,14 +4,16 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import com.vff.entity.User;
 import com.vff.repository.UserRespository;
 
+@Repository
 public class UserServiceImpt implements UserService {
 	
 	@Autowired
-	private UserRespository repo;
+	 UserRespository repo;
 
 	@Override
 	public List<User> findAll() {
