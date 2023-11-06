@@ -1,4 +1,4 @@
-package com.vff;
+package com.vff.serviceTest;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertEquals;
@@ -7,15 +7,16 @@ import static org.junit.Assert.assertNotNull;
 
 import java.util.List;
 
+import org.junit.Test;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import com.vff.entity.User;
 import com.vff.repository.UserRespository;
+
 
 @SpringBootTest
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
