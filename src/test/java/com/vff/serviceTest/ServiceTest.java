@@ -12,6 +12,7 @@ import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.TestMethodOrder;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import com.vff.entity.User;
@@ -19,6 +20,7 @@ import com.vff.repository.UserRespository;
 
 
 @SpringBootTest
+@WebMvcTest(controllers = UserRespository.class)
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class SpringBootModelMappingApplicationTests {
 	

@@ -11,9 +11,9 @@ import com.vff.repository.UserRespository;
 
 @Repository
 public class UserServiceImpt implements UserService {
-	
+
 	@Autowired
-	 UserRespository repo;
+	UserRespository repo;
 
 	@Override
 	public List<User> findAll() {
@@ -26,22 +26,24 @@ public class UserServiceImpt implements UserService {
 	public User findById(Long id) {
 		User user = null;
 		Optional<User> optional = repo.findById(id);
-		if(optional.isPresent()) {
+		if (optional.isPresent()) {
 			user = optional.get();
 		}
 		return user;
 	}
 
 	@Override
-	public String deleteById(Long id) {
-		repo.deleteById(id);
-		return "User Deleted Successfully from Database";
+	public Optional<User> deleteById(Long id) {
+
+		Optional<User> optional = repo.findById(id);
+
+		return optional;
 	}
 
 	@Override
 	public String UpdateUserByDetails(User user) {
 		repo.save(user);
-		
+
 		return "User Updated Successfully";
 	}
 
