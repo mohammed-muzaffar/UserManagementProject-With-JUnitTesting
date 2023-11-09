@@ -36,15 +36,16 @@ public class UserServiceImpt implements UserService {
 	public Optional<User> deleteById(Long id) {
 
 		Optional<User> optional = repo.findById(id);
+		repo.deleteById(id);
 
 		return optional;
 	}
 
 	@Override
-	public String UpdateUserByDetails(User user) {
-		repo.save(user);
+	public User UpdateUserByDetails(User user) {
+		User updated = repo.save(user);
 
-		return "User Updated Successfully";
+		return updated;
 	}
 
 	@Override

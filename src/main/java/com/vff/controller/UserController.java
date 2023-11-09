@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.vff.entity.User;
 import com.vff.service.UserService;
 
+import jakarta.validation.Valid;
+
 @RestController
 @RequestMapping("CRM")
 public class UserController {
@@ -25,7 +27,7 @@ public class UserController {
 	private UserService service;
 	
 	@PostMapping("/registration")
-	public ResponseEntity<?> register(@RequestBody User user){
+	public ResponseEntity<?> register(@RequestBody @Valid User user){
 		try {
 			String response =  service.registerUser(user);
 			return new ResponseEntity<String>(response, HttpStatus.OK);
@@ -52,11 +54,16 @@ public class UserController {
 		
 	}
 	
-	@PatchMapping("/updateUser")
-	public ResponseEntity<?> updateUser(@RequestBody User user){
+	@PatchMapping("/updateUser/{id}")
+	public ResponseEntity<?> updateUser(@RequestBody @Valid User user, @PathVariable Long id){
 		try {
-			String updated = service.UpdateUserByDetails(user);
-			return new ResponseEntity<String>(updated, HttpStatus.OK);
+			User oldRecord = service.findById(id);
+			oldRecord.setFirstName(user.getFirstName());
+			oldRecord.setLastName(user.getLastName());
+			oldRecord.setEmail(user.getEmail());
+			service.registerUser(oldRecord);
+			User updated = service.findById(id);
+			return new ResponseEntity<User>(updated, HttpStatus.OK);
 		}catch(Exception e) {
 			return new ResponseEntity<String>("Failed to Update the User", HttpStatus.INTERNAL_SERVER_ERROR);
 		}

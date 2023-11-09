@@ -20,7 +20,7 @@ import com.vff.repository.UserRespository;
 
 
 @SpringBootTest
-@WebMvcTest(controllers = UserRespository.class)
+@WebMvcTest(excludeAutoConfiguration = UserRespository.class)
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class SpringBootModelMappingApplicationTests {
 	
