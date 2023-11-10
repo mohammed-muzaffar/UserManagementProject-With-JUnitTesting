@@ -29,16 +29,16 @@ public class User {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@NotEmpty
+	@NotEmpty(message = "User firstName should not be null or empty")
 	@Column(nullable=false)
 	private String firstName;
 	
-	@NotEmpty
+	@NotEmpty(message = "User lastName should not be null or empty")
 	@Column(nullable=false)
 	private String lastName;
 	
-	@NotEmpty
-	@Email
+	@NotEmpty(message = "User email should not be null or empty")
+	@Email(message = "emial should be valid")
 	@Column(nullable=false, unique=true)
 	private String email;
 	
