@@ -13,4 +13,6 @@ public interface UserService {
 	public Optional<User> deleteById(Long id);
 	public User UpdateUserByDetails(User user, Long id);
 	public String registerUser(User user);
+
+
 }

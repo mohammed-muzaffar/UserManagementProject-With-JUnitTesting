@@ -1,7 +1,5 @@
 package com.vff.controller;
 
-import com.vff.Exception.ErrorDetails;
-import com.vff.Exception.UserNotFoundException;
 import com.vff.entity.User;
 import com.vff.service.UserService;
 import jakarta.validation.Valid;
@@ -9,9 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.context.request.WebRequest;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
@@ -62,17 +58,17 @@ public class UserController {
 
 	}
 
-	@ExceptionHandler
-	public ResponseEntity<ErrorDetails> handleResourceNotFoundException(UserNotFoundException exception,
-																		WebRequest webRequest) {
-		ErrorDetails errorDetails = new ErrorDetails(
-				LocalDateTime.now(),
-				exception.getMessage(),
-				webRequest.getDescription(false),
-				"User_Not_Found"
-		);
-		return new ResponseEntity<ErrorDetails>(errorDetails, HttpStatus.NOT_FOUND);
-
-	}
+//	@ExceptionHandler(UserNotFoundException.class)
+//	public ResponseEntity<ErrorDetails> handleResourceNotFoundException(UserNotFoundException exception,
+//																		WebRequest webRequest) {
+//		ErrorDetails errorDetails = new ErrorDetails(
+//				LocalDateTime.now(),
+//				exception.getMessage(),
+//				webRequest.getDescription(false),
+//				"User_Not_Found"
+//		);
+//		return new ResponseEntity<ErrorDetails>(errorDetails, HttpStatus.NOT_FOUND);
+//
+//	}
 	
 }

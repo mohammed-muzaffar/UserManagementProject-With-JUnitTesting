@@ -1,5 +1,6 @@
 package com.vff.service;
 
+import com.vff.Exception.EmailAlreadyExistsException;
 import com.vff.Exception.UserNotFoundException;
 import com.vff.entity.User;
 import com.vff.repository.UserRespository;
@@ -49,16 +50,28 @@ public class UserServiceImpt implements UserService {
 		User oldRecord = repo.findById(id).orElseThrow(
 				() -> new UserNotFoundException("user", "id", id)
 		);
-		oldRecord.setFirstName(user.getFirstName());
-		oldRecord.setLastName(user.getLastName());
-		oldRecord.setEmail(user.getEmail());
-		return  repo.save(oldRecord);
+
+		Optional<User> optionalUser = repo.findByEmail(user.getEmail());
+
+		if(optionalUser.isPresent()){
+			throw new EmailAlreadyExistsException("user", user.getEmail());
+		}
+		User result = repo.save(user);
+		return result;
 	}
 
 	@Override
 	public String registerUser(User user) {
+
+
+		Optional<User> optionalUser = repo.findByEmail(user.getEmail());
+		if(optionalUser.isPresent()){
+			throw new EmailAlreadyExistsException("user", user.getEmail());
+		}
 		Long id = repo.save(user).getId();
+
 		return "User registeration successfull " + id + ".";
 	}
+
 
 }
